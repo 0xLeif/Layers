@@ -17,44 +17,34 @@ This app was designed to make a simple way to display data in seperate layers. T
 #To add a new layer: (Will simplify)
 
 ##Step 1:
-```
-let layerHeight : CGFloat = (UIScreen.mainScreen().bounds.height)/4
-```
-Change the number 4 (Number of current views) to what number of views you want
-
-##Step 2:
-```
-class ViewController: UIViewController {
-    var titleView : Layer?
-    var firstView : Layer?
-    var secondView : Layer?
-    var thirdView : Layer?
-    //Add new layer here
-```
-##Step 3:
 
 In func createLayers()
 ```
- //create and store it in the var you made
- titleView = createLayer(purple, "Title")
- //add it to the view!
- view.addSubview(titleView!)
+layers.addLayer(/*UIColor*/, title: "title")
 ```
-##Step 4:
 
-In func addLayerHandlers()
-```
-   /*var name here*/?.addSubview(makeButton("/*var name here*/Pressed:"))
-```
-##Step 5: (Annoying will fix! :D)
+##Step 2:
 
-Create func/selector with format:
+While adding layer you can add InnerViews
 ```
-  func /*var name here*/Pressed(sender: AnyObject){
-        self.titleView?.animateBackToOriginalPosition()
-        self.firstView?.animateBackToOriginalPosition()
-        self.secondView?.animateBackToOriginalPosition()
-        self.thirdView?.animateBackToOriginalPosition()
-  }
-``` 
-  
+layers.addLayer(blue, title: "First").addToInnerView({
+            let label = UILabel(frame: CGRectMake(20, 40, 100, 40))
+            label.text = "Inside the First view!"
+            label.sizeToFit()
+            return label
+        })
+```
+
+or
+
+You can search for the layer by the title
+```
+layers.layerWithTitle("Second")?.addToInnerView({
+            let buttonSegue = UIButton(frame: CGRectMake(30, 50, screenWidth-60, 50))
+            buttonSegue.setTitle("Next", forState: UIControlState.Normal)
+            buttonSegue.addTarget(self, action: "segue:", forControlEvents: .TouchUpInside)
+            buttonSegue.titleLabel?.textAlignment = .Center
+            buttonSegue.titleLabel?.textColor = .blackColor()
+            return buttonSegue
+        })
+```
