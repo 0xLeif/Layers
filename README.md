@@ -14,7 +14,7 @@ This app was designed to make a simple way to display data in seperate layers. T
 
 <a href="http://s357.photobucket.com/user/Zach_Eriksen/media/iOS%20Simulator%20Screen%20Shot%20Jun%2026%202015%2011.07.05%20AM_zps42pesy2t.png.html" target="_blank"><img src="http://i357.photobucket.com/albums/oo13/Zach_Eriksen/iOS%20Simulator%20Screen%20Shot%20Jun%2026%202015%2011.07.05%20AM_zps42pesy2t.png" border="0" alt=" photo iOS Simulator Screen Shot Jun 26 2015 11.07.05 AM_zps42pesy2t.png"/></a>
 
-#To add a new layer: (Will simplify)
+#To add a new layer:
 
 ##Step 1:
 
