@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     var secondView : Layer?
     var thirdView : Layer?
     //Add new layer here
-    ```
+```
 ##Step 3:
 
 In func createLayers()
@@ -39,13 +39,13 @@ In func createLayers()
  titleView = createLayer(purple, "Title")
  //add it to the view!
  view.addSubview(titleView!)
- ```
+```
 ##Step 4:
 
 In func addLayerHandlers()
 ```
    /*var name here*/?.addSubview(makeButton("/*var name here*/Pressed:"))
-   ```
+```
 ##Step 5: (Annoying will fix! :D)
 
 Create func/selector with format:
@@ -56,5 +56,5 @@ Create func/selector with format:
         self.secondView?.animateBackToOriginalPosition()
         self.thirdView?.animateBackToOriginalPosition()
   }
- ``` 
+``` 
   
