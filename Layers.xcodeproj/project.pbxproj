@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		921AC7311B3DD4400060E0EB /* LayerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921AC7301B3DD4400060E0EB /* LayerHandler.swift */; };
 		92CD369F1B3B92FE002207D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD369E1B3B92FE002207D4 /* AppDelegate.swift */; };
 		92CD36A11B3B92FE002207D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD36A01B3B92FE002207D4 /* ViewController.swift */; };
 		92CD36A41B3B92FE002207D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92CD36A21B3B92FE002207D4 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		921AC7301B3DD4400060E0EB /* LayerHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerHandler.swift; sourceTree = "<group>"; };
 		92CD36991B3B92FE002207D4 /* Layers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Layers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CD369D1B3B92FE002207D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92CD369E1B3B92FE002207D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				92CD369E1B3B92FE002207D4 /* AppDelegate.swift */,
 				92CD36A01B3B92FE002207D4 /* ViewController.swift */,
 				92CD36BE1B3B9D69002207D4 /* Layer.swift */,
+				921AC7301B3DD4400060E0EB /* LayerHandler.swift */,
 				92CD36A21B3B92FE002207D4 /* Main.storyboard */,
 				92CD36A51B3B92FE002207D4 /* Images.xcassets */,
 				92CD36A71B3B92FE002207D4 /* LaunchScreen.xib */,
@@ -217,6 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				921AC7311B3DD4400060E0EB /* LayerHandler.swift in Sources */,
 				92CD36BF1B3B9D69002207D4 /* Layer.swift in Sources */,
 				92CD36A11B3B92FE002207D4 /* ViewController.swift in Sources */,
 				92CD369F1B3B92FE002207D4 /* AppDelegate.swift in Sources */,
