@@ -12,8 +12,10 @@ import UIKit
 class LayerHandler : NSObject{
     var layers : [Layer] = [] {
         didSet{
+            if layers.count > 8 {
+                println("\(ErrorLayers[0])")
+            }
             layerHeight = screenHeight/CGFloat(layers.count)
-            println(layerHeight!)
             var y : CGFloat = 0
             for layer in layers{
                 layer.frame = CGRectMake(layer.frame.origin.x, y, layer.frame.width, layerHeight!)
@@ -49,7 +51,7 @@ class LayerHandler : NSObject{
         }
     }
     
-    func addLayer(color : UIColor, title : String) {
+    func addLayer(color : UIColor, title : String) -> Layer{
         let layer = Layer(y: y, color: color, title: title, tag: tag++, layerHeight : layerHeight!)
         y += layerHeight!
         let button = UIButton(frame: CGRectMake(0, 0, screenWidth, layerHeight!))
@@ -58,6 +60,7 @@ class LayerHandler : NSObject{
         layer.addSubview(button)
         layer.sendSubviewToBack(button)
         layers.append(layer)
+        return layer
     }
     
     func layerWithTitle(title : String) -> Layer? {
@@ -69,3 +72,7 @@ class LayerHandler : NSObject{
         return nil
     }
 }
+
+let ErrorLayers = [
+    "WARNING: You are putting a lot of layers, might not work right or look nice :)"
+]

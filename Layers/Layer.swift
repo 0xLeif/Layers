@@ -16,7 +16,7 @@ let darkGreen = UIColor(red: 107/255, green: 134/255, blue: 113/255, alpha: 1)
 
 class Layer : UIView {
     let width = UIScreen.mainScreen().bounds.width
-    let minimizedSize :CGFloat = 40
+    let minimizedSize :CGFloat = 60
     let animationDuration :NSTimeInterval = 0.5
     var label : UILabel?
     var innerView : UIView?

@@ -32,8 +32,7 @@ class ViewController: UIViewController {
     
     func createLayers(){
         layers.addLayer(purple, title: "Title")
-        layers.addLayer(blue, title: "first")
-        layers.layerWithTitle("first")?.addToInnerView({
+        layers.addLayer(blue, title: "First").addToInnerView({
             let label = UILabel(frame: CGRectMake(20, 40, 100, 40))
             label.text = "Inside the First view!"
             label.sizeToFit()
@@ -48,6 +47,7 @@ class ViewController: UIViewController {
             buttonSegue.titleLabel?.textColor = .blackColor()
             return buttonSegue
         })
+        layers.addLayer(darkGreen, title: "Third")
     }
     
     func addLayersToView(){
