@@ -38,9 +38,9 @@ class ViewController: UIViewController {
             y += layerHeight
             return layerToReturn
         }
-        titleView = createLayer(purple, title: "Title")
+        titleView = createLayer(purple, "Title")
         view.addSubview(titleView!)
-        firstView = createLayer(blue, title: "First")
+        firstView = createLayer(blue, "First")
         firstView?.addToInnerView({
             let label = UILabel(frame: CGRectMake(20, 40, 100, 40))
             label.text = "Inside the First view!"
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
             return label
         })
         view.addSubview(firstView!)
-        secondView = createLayer(lightGreen, title: "Second")
+        secondView = createLayer(lightGreen, "Second")
         secondView?.addToInnerView({
             let scrollList = UIScrollView(frame: CGRectMake(0, 0, self.secondView!.frame.width, self.secondView!.getMaximizedHeight()))
             var finalY :CGFloat = 80
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
             return scrollList
         })
         view.addSubview(secondView!)
-        thirdView = createLayer(darkGreen, title: "Third")
+        thirdView = createLayer(darkGreen, "Third")
         thirdView?.addToInnerView({
             let buttonSegue = UIButton(frame: CGRectMake(30, 50, screenWidth-60, 50))
             buttonSegue.setTitle("Next", forState: UIControlState.Normal)
