@@ -29,44 +29,49 @@ class ViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(navigationController?.navigationBarHidden == false, animated: false)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     func createLayers(){
         var y  : CGFloat = 0
-        titleView = Layer(y: y,color : UIColor(red: 115/255, green: 115/255, blue: 150/255, alpha: 1), title: "Title", tag : 0)
-        view.addSubview(titleView!)
-        y += layerHeight
-        firstView = Layer(y: y,color : UIColor(red: 102/255, green: 168/255, blue: 174/255, alpha: 1), title: "First" , tag : 1)
-        let test = UILabel(frame: CGRectMake(20, 40, 100, 40))
-        test.text = "Test Label!"
-        firstView?.addToInnerView(test)
-        view.addSubview(firstView!)
-        y += layerHeight
-        secondView = Layer(y: y,color : UIColor(red: 196/255, green: 213/255, blue: 173/255, alpha: 1), title: "Second", tag : 2)
-        let scrollList = UIScrollView(frame: CGRectMake(0, 0, secondView!.frame.width, secondView!.getMaximizedHeight()))
-        var finalY :CGFloat = 80
-        for testStuff in 0...20 {
-            let testLabel = UILabel(frame: CGRectMake(10, CGFloat(testStuff*40), scrollList.frame.width-20, 40))
-            finalY += 40
-            testLabel.textAlignment = .Center
-            testLabel.text  = "Look at this number: \(testStuff)"
-            scrollList.addSubview(testLabel)
+        var tag = 0
+        func createLayer(color : UIColor, title : String) -> Layer{
+            let layerToReturn = Layer(y: y, color: color, title: title, tag: tag++)
+            y += layerHeight
+            return layerToReturn
         }
-        scrollList.contentSize = CGSizeMake(screenWidth, finalY)
-        secondView?.addToInnerView(scrollList)
+        titleView = createLayer(purple, title: "Title")
+        view.addSubview(titleView!)
+        firstView = createLayer(blue, title: "First")
+        firstView?.addToInnerView({
+            let label = UILabel(frame: CGRectMake(20, 40, 100, 40))
+            label.text = "Inside the First view!"
+            label.sizeToFit()
+            return label
+        })
+        view.addSubview(firstView!)
+        secondView = createLayer(lightGreen, title: "Second")
+        secondView?.addToInnerView({
+            let scrollList = UIScrollView(frame: CGRectMake(0, 0, self.secondView!.frame.width, self.secondView!.getMaximizedHeight()))
+            var finalY :CGFloat = 80
+            for count in 0...20 {
+                let label = UILabel(frame: CGRectMake(10, CGFloat(count*40), scrollList.frame.width-20, 40))
+                finalY += 40
+                label.textAlignment = .Center
+                label.text  = "Look at this number: \(count)"
+                scrollList.addSubview(label)
+            }
+            scrollList.contentSize = CGSizeMake(screenWidth, finalY)
+            return scrollList
+        })
         view.addSubview(secondView!)
-        y += layerHeight
-        thirdView = Layer(y: y,color : UIColor(red: 107/255, green: 134/255, blue: 113/255, alpha: 1), title: "Third", tag : 3)
-        let segueToCool = UIButton(frame: CGRectMake(30, 50, screenWidth-60, 50))
-        segueToCool.setTitle("Next", forState: UIControlState.Normal)
-        segueToCool.addTarget(self, action: "segue:", forControlEvents: .TouchUpInside)
-        segueToCool.titleLabel?.textAlignment = .Center
-        segueToCool.titleLabel?.textColor = .blackColor()
-        thirdView?.addToInnerView(segueToCool)
+        thirdView = createLayer(darkGreen, title: "Third")
+        thirdView?.addToInnerView({
+            let buttonSegue = UIButton(frame: CGRectMake(30, 50, screenWidth-60, 50))
+            buttonSegue.setTitle("Next", forState: UIControlState.Normal)
+            buttonSegue.addTarget(self, action: "segue:", forControlEvents: .TouchUpInside)
+            buttonSegue.titleLabel?.textAlignment = .Center
+            buttonSegue.titleLabel?.textColor = .blackColor()
+            return buttonSegue
+        })
         view.addSubview(thirdView!)
     }
     
@@ -116,7 +121,4 @@ class ViewController: UIViewController {
             self.secondView?.animateToMinimizedPosition()
             self.thirdView?.animateToMaximizedPosition()
     }
-
-
 }
-

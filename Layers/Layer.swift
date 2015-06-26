@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+
+let purple = UIColor(red: 115/255, green: 115/255, blue: 150/255, alpha: 1)
+let blue =  UIColor(red: 102/255, green: 168/255, blue: 174/255, alpha: 1)
+let lightGreen = UIColor(red: 196/255, green: 213/255, blue: 173/255, alpha: 1)
+let darkGreen = UIColor(red: 107/255, green: 134/255, blue: 113/255, alpha: 1)
+
 class Layer : UIView {
     let width = UIScreen.mainScreen().bounds.width
     let minimizedSize :CGFloat = 40
@@ -23,10 +29,10 @@ class Layer : UIView {
         self.tag = tag
         firstRect = CGRectMake(0, 0, frame.width, frame.height)
         label = makeLabel(title)
-        addSubview(label!)
         self.backgroundColor = color
         innerView = UIView(frame: rect)
         innerView?.hidden = true
+        addSubview(label!)
         addSubview(innerView!)
     }
     
@@ -45,8 +51,8 @@ class Layer : UIView {
         label?.frame = firstRect!
     }
     
-    func addToInnerView(subView : UIView){
-        innerView?.addSubview(subView)
+    func addToInnerView(view : () -> UIView){
+        innerView?.addSubview(view())
     }
     
     func showInnerView(){
