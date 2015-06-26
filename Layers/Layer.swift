@@ -61,7 +61,7 @@ class Layer : UIView {
     func animateBackToOriginalPosition(){
         UIView.animateWithDuration(animationDuration, animations: {
             self.returnLabelToFirstLocation()
-            self.frame = CGRectMake(0, (CGFloat(self.tag)*layerHeight+navBarHeight), screenWidth, layerHeight)
+            self.frame = CGRectMake(0, (CGFloat(self.tag)*layerHeight), screenWidth, layerHeight)
         }, completion: { _ in
             self.hideInnerView()
         })
@@ -70,7 +70,7 @@ class Layer : UIView {
     func animateToMinimizedPosition(){
         UIView.animateWithDuration(animationDuration, animations: {
             self.moveLabelToTop()
-            self.frame = CGRectMake(0, (CGFloat(self.tag)*self.minimizedSize+navBarHeight), screenWidth, self.minimizedSize)
+            self.frame = CGRectMake(0, (CGFloat(self.tag)*self.minimizedSize), screenWidth, self.minimizedSize)
         }, completion: { _ in
             self.hideInnerView()
         })
@@ -80,7 +80,7 @@ class Layer : UIView {
         self.showInnerView()
         UIView.animateWithDuration(animationDuration, animations: {
                 self.moveLabelToTop()
-                self.frame = CGRectMake(0, (CGFloat(self.tag)*self.minimizedSize+navBarHeight), screenWidth, self.getMaximizedHeight())
+                self.frame = CGRectMake(0, (CGFloat(self.tag)*self.minimizedSize), screenWidth, self.getMaximizedHeight())
             })
     }
     

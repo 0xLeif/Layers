@@ -9,8 +9,7 @@
 
 import UIKit
 
-let navBarHeight : CGFloat = 64
-let layerHeight : CGFloat = (UIScreen.mainScreen().bounds.height-navBarHeight)/4
+let layerHeight : CGFloat = (UIScreen.mainScreen().bounds.height)/4
 let screenWidth = UIScreen.mainScreen().bounds.width
 let screenHeight = UIScreen.mainScreen().bounds.height
 
@@ -25,6 +24,11 @@ class ViewController: UIViewController {
         createLayers()
         addLayerHandlers()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(navigationController?.navigationBarHidden == false, animated: false)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -32,7 +36,7 @@ class ViewController: UIViewController {
     }
     
     func createLayers(){
-        var y  : CGFloat = navBarHeight
+        var y  : CGFloat = 0
         titleView = Layer(y: y,color : UIColor(red: 115/255, green: 115/255, blue: 150/255, alpha: 1), title: "Title", tag : 0)
         view.addSubview(titleView!)
         y += layerHeight
@@ -68,6 +72,7 @@ class ViewController: UIViewController {
     
     func segue(sender : AnyObject){
             performSegueWithIdentifier("nextView", sender: nil)
+            navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     func addLayerHandlers(){
