@@ -10,10 +10,14 @@ import Foundation
 import UIKit
 
 class LayerHandler : UIView{
+    let WarningLayer = [
+        "WARNING: You are putting a lot of layers, might not work right or look nice :)",
+        "WARNING: Default init will have frame of x: 0, y: 0, width: \(screenWidth), height: \(screenHeight)"
+    ]
     var layers : [Layer] = [] {
         didSet{
             if layers.count > 8 {
-                println("\(ErrorLayers[0])")
+                println("\(WarningLayer[0])")
             }
             layerHeight = frame.height/CGFloat(layers.count)
             var y : CGFloat = 0
@@ -28,6 +32,12 @@ class LayerHandler : UIView{
     var y  : CGFloat = 0
     var tagForLayers = 0
     var layerHeight : CGFloat?
+    
+    init(){
+        super.init(frame: CGRectMake(0, 0, screenWidth, screenHeight))
+        layerHeight = frame.height
+        println(WarningLayer[1])
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -78,7 +88,3 @@ class LayerHandler : UIView{
         return nil
     }
 }
-
-let ErrorLayers = [
-    "WARNING: You are putting a lot of layers, might not work right or look nice :)"
-]

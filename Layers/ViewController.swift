@@ -13,9 +13,10 @@ let screenWidth = UIScreen.mainScreen().bounds.width
 let screenHeight = UIScreen.mainScreen().bounds.height
 
 class ViewController: UIViewController {
-    var layers = LayerHandler(frame: CGRectMake(0, 0, screenWidth/2, screenHeight))
+    var layers = LayerHandler()
     override func viewDidLoad() {
         super.viewDidLoad()
+        layers.frame = CGRectMake(0, 0, 200, screenHeight)
         createLayers()
         view.addSubview(layers)
     }
