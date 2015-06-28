@@ -13,16 +13,11 @@ let screenWidth = UIScreen.mainScreen().bounds.width
 let screenHeight = UIScreen.mainScreen().bounds.height
 
 class ViewController: UIViewController {
-    var layers = LayerHandler()
-    var titleView : Layer?
-    var firstView : Layer?
-    var secondView : Layer?
-    var thirdView : Layer?
-
+    var layers = LayerHandler(frame: CGRectMake(0, 0, screenWidth/2, screenHeight))
     override func viewDidLoad() {
         super.viewDidLoad()
         createLayers()
-        addLayersToView()
+        view.addSubview(layers)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -33,14 +28,14 @@ class ViewController: UIViewController {
     func createLayers(){
         layers.addLayer(purple, title: "Title")
         layers.addLayer(blue, title: "First").addToInnerView({
-            let label = UILabel(frame: CGRectMake(20, 40, 100, 40))
+            let label = UILabel(frame: CGRectMake(0, 0, 100, 40))
             label.text = "Inside the First view!"
             label.sizeToFit()
             return label
         })
         layers.addLayer(lightGreen, title: "Second")
         layers.layerWithTitle("Second")?.addToInnerView({
-            let buttonSegue = UIButton(frame: CGRectMake(30, 50, screenWidth-60, 50))
+            let buttonSegue = UIButton(frame: CGRectMake(30, 50, self.layers.layerWithTitle("Second")!.frame.width-60, 50))
             buttonSegue.setTitle("Next", forState: UIControlState.Normal)
             buttonSegue.addTarget(self, action: "segue:", forControlEvents: .TouchUpInside)
             buttonSegue.titleLabel?.textAlignment = .Center
@@ -48,12 +43,6 @@ class ViewController: UIViewController {
             return buttonSegue
         })
         layers.addLayer(darkGreen, title: "Third")
-    }
-    
-    func addLayersToView(){
-        for layer in layers.layers {
-            view.addSubview(layer)
-        }
     }
     
     func segue(sender : AnyObject){

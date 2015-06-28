@@ -9,28 +9,33 @@
 import Foundation
 import UIKit
 
-class LayerHandler : NSObject{
+class LayerHandler : UIView{
     var layers : [Layer] = [] {
         didSet{
             if layers.count > 8 {
                 println("\(ErrorLayers[0])")
             }
-            layerHeight = screenHeight/CGFloat(layers.count)
+            layerHeight = frame.height/CGFloat(layers.count)
             var y : CGFloat = 0
             for layer in layers{
                 layer.frame = CGRectMake(layer.frame.origin.x, y, layer.frame.width, layerHeight!)
-                layer.updateLabel()
+                layer.updateLayer()
                 layer.layerHeight = layerHeight
                 y += layerHeight!
             }
         }
     }
     var y  : CGFloat = 0
-    var tag = 0
+    var tagForLayers = 0
     var layerHeight : CGFloat?
     
-    override init(){
-        layerHeight = screenHeight
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+         layerHeight = frame.height
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func layerPressed(sender : AnyObject){
@@ -52,14 +57,15 @@ class LayerHandler : NSObject{
     }
     
     func addLayer(color : UIColor, title : String) -> Layer{
-        let layer = Layer(y: y, color: color, title: title, tag: tag++, layerHeight : layerHeight!)
+        let layer = Layer(y: y, color: color, title: title, tag: tagForLayers++,layerWidth: frame.width, layerHeight : layerHeight!)
         y += layerHeight!
-        let button = UIButton(frame: CGRectMake(0, 0, screenWidth, layerHeight!))
+        let button = UIButton(frame: CGRectMake(0, 0, frame.width, layerHeight!))
         button.addTarget(self, action: "layerPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         button.tag = layer.tag
         layer.addSubview(button)
         layer.sendSubviewToBack(button)
         layers.append(layer)
+        addSubview(layer)
         return layer
     }
     
