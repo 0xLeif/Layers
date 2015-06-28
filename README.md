@@ -18,16 +18,26 @@ This app was designed to make a simple way to display data in seperate layers. T
 
 ##Step 1:
 
-In func createLayers()
 ```
-layers.addLayer(/*UIColor*/, title: "title")
+var handler = LayerHandler() //Will default to fullscreen
+handler.frame = frame
+```
+or
+```
+var handler = LayerHandler(frame: frame)
 ```
 
 ##Step 2:
 
+```
+handler.addLayer(color, title: "title")
+```
+
+##Step 3:
+
 While adding layer you can add InnerViews
 ```
-layers.addLayer(blue, title: "First").addToInnerView({
+handler.addLayer(blue, title: "First").addToInnerView({
             let label = UILabel(frame: CGRectMake(20, 40, 100, 40))
             label.text = "Inside the First view!"
             label.sizeToFit()
@@ -39,7 +49,7 @@ or
 
 You can search for the layer by the title
 ```
-layers.layerWithTitle("Second")?.addToInnerView({
+handler.layerWithTitle("Second")?.addToInnerView({
             let buttonSegue = UIButton(frame: CGRectMake(30, 50, screenWidth-60, 50))
             buttonSegue.setTitle("Next", forState: UIControlState.Normal)
             buttonSegue.addTarget(self, action: "segue:", forControlEvents: .TouchUpInside)
@@ -48,7 +58,11 @@ layers.layerWithTitle("Second")?.addToInnerView({
             return buttonSegue
         })
 ```
+##Step 4:
 
+```
+view.addSubview(handler)
+```
 
 #License
 MIT License
