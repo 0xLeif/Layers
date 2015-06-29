@@ -60,6 +60,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		927F06F41B40E49D00E26C6D /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				92CD36BE1B3B9D69002207D4 /* Layer.swift */,
+				921AC7301B3DD4400060E0EB /* LayerHandler.swift */,
+			);
+			name = Layers;
+			sourceTree = "<group>";
+		};
 		92CD36901B3B92FE002207D4 = {
 			isa = PBXGroup;
 			children = (
@@ -83,8 +92,7 @@
 			children = (
 				92CD369E1B3B92FE002207D4 /* AppDelegate.swift */,
 				92CD36A01B3B92FE002207D4 /* ViewController.swift */,
-				92CD36BE1B3B9D69002207D4 /* Layer.swift */,
-				921AC7301B3DD4400060E0EB /* LayerHandler.swift */,
+				927F06F41B40E49D00E26C6D /* Layers */,
 				92CD36A21B3B92FE002207D4 /* Main.storyboard */,
 				92CD36A51B3B92FE002207D4 /* Images.xcassets */,
 				92CD36A71B3B92FE002207D4 /* LaunchScreen.xib */,

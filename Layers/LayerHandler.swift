@@ -10,15 +10,13 @@ import Foundation
 import UIKit
 
 class LayerHandler : UIView{
-    let WarningLayer = [
-        "WARNING: You are putting a lot of layers, might not work right or look nice :)",
-        "WARNING: Default init will have frame of x: 0, y: 0, width: \(screenWidth), height: \(screenHeight)"
+    private let WarningLayer = [
+        "WARNING: Layer limit of 8 hit",
+        "WARNING: Default init will have frame of x: 0, y: 0, width: \(screenWidth), height: \(screenHeight)",
+        "WARNING: You must have at least one layer!"
     ]
     var layers : [Layer] = [] {
         didSet{
-            if layers.count > 8 {
-                println("\(WarningLayer[0])")
-            }
             layerHeight = frame.height/CGFloat(layers.count)
             var y : CGFloat = 0
             for layer in layers{
@@ -29,9 +27,9 @@ class LayerHandler : UIView{
             }
         }
     }
-    var y  : CGFloat = 0
-    var tagForLayers = 0
-    var layerHeight : CGFloat?
+    private var y  : CGFloat = 0
+    private var tagForLayers = 0
+    private var layerHeight : CGFloat?
     
     init(){
         super.init(frame: CGRectMake(0, 0, screenWidth, screenHeight))
@@ -66,7 +64,18 @@ class LayerHandler : UIView{
         }
     }
     
-    func addLayer(color : UIColor, title : String) -> Layer{
+    func resetLayersToOriginalPosition(){
+        for layer in layers{
+            layer.animateBackToOriginalPosition()
+        }
+    }
+    
+    func addLayer(color : UIColor, title : String) -> Layer?{
+        if layers.count >= 8 {
+            println(WarningLayer[0])
+            return nil
+        }
+        resetLayersToOriginalPosition()
         let layer = Layer(y: y, color: color, title: title, tag: tagForLayers++,layerWidth: frame.width, layerHeight : layerHeight!)
         y += layerHeight!
         let button = UIButton(frame: CGRectMake(0, 0, frame.width, layerHeight!))
@@ -86,5 +95,48 @@ class LayerHandler : UIView{
             }
         }
         return nil
+    }
+    
+    func removeLayerWithTitle(title : String){
+        if layers.count == 1 {
+            println(WarningLayer[2])
+            return
+        }
+        for l in layers {
+            l.removeFromSuperview()
+            if l.label?.text == title {
+                layers.removeAtIndex(l.tag)
+            }
+        }
+        resetLayersTags()
+    }
+    
+    func removeLayerWithTag(tag : UInt32){
+        if layers.count == 1 {
+           println(WarningLayer[2])
+            return
+        }
+        for l in layers {
+            l.removeFromSuperview()
+            if UInt32(l.label!.tag) == tag {
+                layers.removeAtIndex(l.tag)
+            }
+        }
+        resetLayersTags()
+    }
+    
+    private  func resetLayersTags(){
+        tagForLayers = 0
+        for l in layers {
+            l.tag = tagForLayers
+            for sub in l.subviews {
+                if let button : UIButton = sub as? UIButton {
+                    button.frame = CGRectMake(0, 0, l.frame.width, l.frame.height)
+                    button.tag = tagForLayers++
+                }
+            }
+            addSubview(l)
+        }
+        resetLayersToOriginalPosition()
     }
 }

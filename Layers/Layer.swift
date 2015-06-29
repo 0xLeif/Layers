@@ -9,17 +9,12 @@
 import Foundation
 import UIKit
 
-let purple = UIColor(red: 115/255, green: 115/255, blue: 150/255, alpha: 1)
-let blue =  UIColor(red: 102/255, green: 168/255, blue: 174/255, alpha: 1)
-let lightGreen = UIColor(red: 196/255, green: 213/255, blue: 173/255, alpha: 1)
-let darkGreen = UIColor(red: 107/255, green: 134/255, blue: 113/255, alpha: 1)
-
 class Layer : UIView {
-    let minimizedSize :CGFloat = 60
-    let animationDuration :NSTimeInterval = 0.5
+    private let minimizedSize :CGFloat = 60
+    private let animationDuration :NSTimeInterval = 0.5
     var label : UILabel?
-    var innerView : UIView?
-    var firstRect  : CGRect?
+    private var innerView : UIView?
+    private var firstRect  : CGRect?
     var layerHeight : CGFloat?
 
     init(y : CGFloat, color : UIColor, title : String, tag : Int,layerWidth : CGFloat, layerHeight : CGFloat){
