@@ -11,23 +11,24 @@ import UIKit
 
 class Layer : UIView {
     private let minimizedSize :CGFloat = 50
-    private let animationDuration :NSTimeInterval = 0.5
-    var label : UILabel?
+    private let animationDuration :NSTimeInterval = 0.2
     private var innerView : UIView?
     private var firstRect  : CGRect?
     var layerHeight : CGFloat?
+    var label : UILabel?
     
     init(y : CGFloat, color : UIColor, title : String, tag : Int,layerWidth : CGFloat, layerHeight : CGFloat){
         let rect = CGRect(x: 0, y: y, width: layerWidth, height: layerHeight)
         super.init(frame: rect)
+        
         self.tag = tag
         self.layerHeight = layerHeight
-        firstRect = CGRectMake(0, 0, frame.width, frame.height)
-        makeLabel(title)
-        addSubview(label!)
+        self.firstRect = CGRectMake(0, 0, frame.width, frame.height)
         self.backgroundColor = color
-        innerView = UIView(frame: CGRectMake(0, 0, frame.width, frame.height))
+        self.innerView = UIView(frame: CGRectMake(0, 0, frame.width, frame.height))
         innerView?.hidden = true
+        
+        makeLabel(title)
         addSubview(label!)
         addSubview(innerView!)
         innerView?.sendSubviewToBack(label!)

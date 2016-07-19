@@ -46,7 +46,7 @@ class LayerHandler : UIView{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-         layerHeight = frame.height
+        layerHeight = frame.height
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -83,7 +83,8 @@ class LayerHandler : UIView{
             return nil
         }
         resetLayersToOriginalPosition()
-        let layer = Layer(y: y, color: color, title: title, tag: Int(tagForLayers += 1),layerWidth: frame.width, layerHeight : layerHeight!)
+        let layer = Layer(y: y, color: color, title: title, tag: tagForLayers,layerWidth: frame.width, layerHeight : layerHeight!)
+        tagForLayers += 1
         y += layerHeight!
         let button = UIButton(frame: CGRectMake(0, 0, frame.width, layerHeight!))
         button.addTarget(self, action: #selector(LayerHandler.layerPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
@@ -139,7 +140,8 @@ class LayerHandler : UIView{
             for sub in l.subviews {
                 if let button : UIButton = sub as? UIButton {
                     button.frame = CGRectMake(0, 0, l.frame.width, l.frame.height)
-                    button.tag = Int(tagForLayers += 1)
+                    button.tag = tagForLayers
+                    tagForLayers += 1
                 }
             }
             addSubview(l)
