@@ -41,7 +41,7 @@ class LayerHandler : UIView{
     init(){
         super.init(frame: CGRectMake(0, 0, screenWidth, screenHeight))
         layerHeight = frame.height
-        println(WarningLayer[1])
+        print(WarningLayer[1])
     }
     
     override init(frame: CGRect) {
@@ -49,7 +49,7 @@ class LayerHandler : UIView{
          layerHeight = frame.height
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -79,14 +79,14 @@ class LayerHandler : UIView{
     
     func addLayer(color : UIColor, title : String) -> Layer?{
         if layers.count >= 8 {
-            println(WarningLayer[0])
+            print(WarningLayer[0])
             return nil
         }
         resetLayersToOriginalPosition()
-        let layer = Layer(y: y, color: color, title: title, tag: tagForLayers++,layerWidth: frame.width, layerHeight : layerHeight!)
+        let layer = Layer(y: y, color: color, title: title, tag: Int(tagForLayers += 1),layerWidth: frame.width, layerHeight : layerHeight!)
         y += layerHeight!
         let button = UIButton(frame: CGRectMake(0, 0, frame.width, layerHeight!))
-        button.addTarget(self, action: "layerPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(LayerHandler.layerPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         button.tag = layer.tag
         layer.addSubview(button)
         layer.sendSubviewToBack(button)
@@ -106,7 +106,7 @@ class LayerHandler : UIView{
     
     func removeLayerWithTitle(title : String){
         if layers.count == 1 {
-            println(WarningLayer[2])
+            print(WarningLayer[2])
             return
         }
         for l in layers {
@@ -120,7 +120,7 @@ class LayerHandler : UIView{
     
     func removeLayerWithTag(tag : UInt32){
         if layers.count == 1 {
-           println(WarningLayer[2])
+           print(WarningLayer[2])
             return
         }
         for l in layers {
@@ -139,7 +139,7 @@ class LayerHandler : UIView{
             for sub in l.subviews {
                 if let button : UIButton = sub as? UIButton {
                     button.frame = CGRectMake(0, 0, l.frame.width, l.frame.height)
-                    button.tag = tagForLayers++
+                    button.tag = Int(tagForLayers += 1)
                 }
             }
             addSubview(l)

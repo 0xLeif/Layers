@@ -35,8 +35,7 @@ class ViewController: UIViewController {
     
     func delete(){
         if handler.layers.count > 0 {
-            let layerRandom = arc4random_uniform(UInt32(handler.layers.count))
-            var layerName = handler.layers[0].label!.text
+            let layerName = handler.layers[0].label!.text
             handler.removeLayerWithTitle(layerName!)
         }
     }
@@ -63,7 +62,7 @@ class ViewController: UIViewController {
         handler.layerWithTitle("Budget")?.addToInnerView({
             let buttonSegue = UIButton(frame: CGRectMake(30, 50, self.handler.layerWithTitle("Budget")!.frame.width-60, 50))
             buttonSegue.setTitle("Next", forState: UIControlState.Normal)
-            buttonSegue.addTarget(self, action: "segue:", forControlEvents: .TouchUpInside)
+            buttonSegue.addTarget(self, action: #selector(ViewController.segue(_:)), forControlEvents: .TouchUpInside)
             buttonSegue.titleLabel?.textAlignment = .Center
             buttonSegue.titleLabel?.textColor = .blackColor()
             return buttonSegue
