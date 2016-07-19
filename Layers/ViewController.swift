@@ -19,18 +19,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         createLayers()
         view.addSubview(handler)
-//        let addButton = UIButton(frame: CGRectMake(200, screenHeight/3, screenWidth-200, 40))
-//        addButton.titleLabel?.textAlignment = .Center
-//        addButton.setTitle("Add", forState: .Normal)
-//        addButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-//        addButton.addTarget(self, action: "add", forControlEvents: .TouchUpInside)
-//        view.addSubview(addButton)
-//        let deleteRandomLayer = UIButton(frame: CGRectMake(200,(screenHeight/3)*2, screenWidth-200, 40))
-//        deleteRandomLayer.titleLabel?.textAlignment = .Center
-//        deleteRandomLayer.setTitle("Delete", forState: .Normal)
-//        deleteRandomLayer.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-//        deleteRandomLayer.addTarget(self, action: "delete", forControlEvents: .TouchUpInside)
-//        view.addSubview(deleteRandomLayer)
     }
     
     func delete(){
