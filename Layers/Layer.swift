@@ -11,7 +11,7 @@ import UIKit
 
 class Layer : UIView {
     private let minimizedSize :CGFloat = 50
-    private let animationDuration :NSTimeInterval = 0.2
+    private let animationDuration :NSTimeInterval = 0.45
     private var innerView : UIView?
     private var firstRect  : CGRect?
     var layerHeight : CGFloat?
