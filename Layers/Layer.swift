@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 
 class Layer : UIView {
-    private let minimizedSize :CGFloat = 50
-    private let animationDuration :NSTimeInterval = 0.45
-    private var innerView : UIView?
-    private var firstRect  : CGRect?
+    fileprivate let minimizedSize :CGFloat = 50
+    fileprivate let animationDuration :TimeInterval = 0.45
+    fileprivate var innerView : UIView?
+    fileprivate var firstRect  : CGRect?
     var layerHeight : CGFloat?
     var label : UILabel?
     
@@ -23,25 +23,25 @@ class Layer : UIView {
         
         self.tag = tag
         self.layerHeight = layerHeight
-        self.firstRect = CGRectMake(0, 0, frame.width, frame.height)
+        self.firstRect = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
         self.backgroundColor = color
-        self.innerView = UIView(frame: CGRectMake(0, 0, frame.width, frame.height))
-        innerView?.hidden = true
+        self.innerView = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
+        innerView?.isHidden = true
         
         makeLabel(title)
         addSubview(label!)
         addSubview(innerView!)
-        innerView?.sendSubviewToBack(label!)
+        innerView?.sendSubview(toBack: label!)
     }
     
-    func makeLabel(text : String) {
-        label = UILabel(frame: CGRectMake(0, 0, frame.width, frame.height))
+    func makeLabel(_ text : String) {
+        label = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
         label!.text = text
-        label!.textAlignment = .Center
+        label!.textAlignment = .center
     }
     
     func updateLayer(){
-        let newRect = CGRectMake(0, 0, frame.width, frame.height)
+        let newRect = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
         innerView?.frame = newRect
         label?.frame = newRect
         firstRect  = newRect
@@ -55,11 +55,11 @@ class Layer : UIView {
         label?.frame = firstRect!
     }
     
-    func addToInnerView(view : () -> UIView){
+    func addToInnerView(_ view : () -> UIView){
         innerView?.addSubview(view())
     }
     
-    func addViewsToInnerView(view : () -> [UIView]){
+    func addViewsToInnerView(_ view : () -> [UIView]){
         for v in view() {
             innerView?.addSubview(v)
         }
@@ -72,27 +72,27 @@ class Layer : UIView {
     }
     
     func showInnerView(){
-        innerView?.frame = CGRectMake(0,0, self.frame.width, self.getMaximizedHeight())
-        innerView?.hidden = false
+        innerView?.frame = CGRect(x: 0,y: 0, width: self.frame.width, height: self.getMaximizedHeight())
+        innerView?.isHidden = false
     }
     
     func hideInnerView(){
-        innerView?.hidden = true
+        innerView?.isHidden = true
     }
     
     func animateBackToOriginalPosition(){
-        UIView.animateWithDuration(animationDuration, animations: {
+        UIView.animate(withDuration: animationDuration, animations: {
             self.returnLabelToFirstLocation()
-            self.frame = CGRectMake(0, (CGFloat(self.tag)*self.layerHeight!), self.frame.width, self.layerHeight!)
+            self.frame = CGRect(x: 0, y: (CGFloat(self.tag)*self.layerHeight!), width: self.frame.width, height: self.layerHeight!)
             }, completion: { _ in
                 self.hideInnerView()
         })
     }
     
     func animateToMinimizedPosition(){
-        UIView.animateWithDuration(animationDuration, animations: {
+        UIView.animate(withDuration: animationDuration, animations: {
             self.moveLabelToTop()
-            self.frame = CGRectMake(0, (CGFloat(self.tag)*self.minimizedSize), self.frame.width, self.minimizedSize)
+            self.frame = CGRect(x: 0, y: (CGFloat(self.tag)*self.minimizedSize), width: self.frame.width, height: self.minimizedSize)
             }, completion: { _ in
                 self.hideInnerView()
         })
@@ -100,18 +100,14 @@ class Layer : UIView {
     
     func animateToMaximizedPosition(){
         self.showInnerView()
-        UIView.animateWithDuration(animationDuration, animations: {
+        UIView.animate(withDuration: animationDuration, animations: {
             self.moveLabelToTop()
-            self.frame = CGRectMake(0, (CGFloat(self.tag)*self.minimizedSize), self.frame.width, self.getMaximizedHeight())
+            self.frame = CGRect(x: 0, y: (CGFloat(self.tag)*self.minimizedSize), width: self.frame.width, height: self.getMaximizedHeight())
         })
     }
     
     func getMaximizedHeight() -> CGFloat{
         return (layerHeight!*CGFloat((tag+1)))-(minimizedSize*CGFloat(tag))
-    }
-    
-    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -38,9 +38,9 @@ class ViewController: UIViewController {
         handler.addLayer(randomColor(), title: "\(arc4random_uniform(100))")
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(navigationController?.navigationBarHidden == false, animated: false)
+        navigationController?.setNavigationBarHidden(navigationController?.isNavigationBarHidden == false, animated: false)
     }
     
     func createLayers(){
@@ -48,19 +48,19 @@ class ViewController: UIViewController {
         handler.addLayer(blue, title: "Plan")
         handler.addLayer(lightGreen, title: "Budget")
         handler.layerWithTitle("Budget")?.addToInnerView({
-            let buttonSegue = UIButton(frame: CGRectMake(30, 50, self.handler.layerWithTitle("Budget")!.frame.width-60, 50))
-            buttonSegue.setTitle("Next", forState: UIControlState.Normal)
-            buttonSegue.addTarget(self, action: #selector(ViewController.segue(_:)), forControlEvents: .TouchUpInside)
-            buttonSegue.titleLabel?.textAlignment = .Center
-            buttonSegue.titleLabel?.textColor = .blackColor()
+            let buttonSegue = UIButton(frame: CGRect(x: 30, y: 50, width: self.handler.layerWithTitle("Budget")!.frame.width-60, height: 50))
+            buttonSegue.setTitle("Next", for: UIControlState())
+            buttonSegue.addTarget(self, action: #selector(ViewController.segue(_:)), for: .touchUpInside)
+            buttonSegue.titleLabel?.textAlignment = .center
+            buttonSegue.titleLabel?.textColor = .black
             return buttonSegue
         })
         handler.addLayer(darkGreen, title: "Vehicles")
         handler.addLayer(UIColor(red: 200/255, green: 100/255, blue: 100/255, alpha: 1), title: "Definitions")
     }
     
-    func segue(sender : AnyObject){
-            performSegueWithIdentifier("nextView", sender: nil)
+    func segue(_ sender : AnyObject){
+            performSegue(withIdentifier: "nextView", sender: nil)
             navigationController?.setNavigationBarHidden(false, animated: true)
     }
 }
