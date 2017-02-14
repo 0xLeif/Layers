@@ -54,18 +54,13 @@ class LayerHandler : UIView{
     }
     
     func layerPressed(_ sender : AnyObject){
-        var tag = sender.tag
         for layer in layers{
-            if tag == 0{
-                tag = -1
-                 layer.animateBackToOriginalPosition()
-            }else if tag == -1{
-                layer.animateBackToOriginalPosition()
-            }else if layer.tag == tag{
+            switch sender.tag! {
+            case layer.tag:
                 layer.animateToMaximizedPosition()
-            }else if layer.tag > tag!{
+            case -1..<layer.tag:
                 layer.animateBackToOriginalPosition()
-            }else {
+            default:
                 layer.animateToMinimizedPosition()
             }
         }
@@ -76,6 +71,7 @@ class LayerHandler : UIView{
             layer.animateBackToOriginalPosition()
         }
     }
+    
     
     func addLayer(_ color : UIColor, title : String) -> Layer?{
         if layers.count >= 8 {
@@ -97,9 +93,9 @@ class LayerHandler : UIView{
     }
     
     func layerWithTitle(_ title : String) -> Layer? {
-        for l in layers {
-            if l.label?.text == title {
-                return l
+        for layer in layers {
+            if layer.label?.text == title {
+                return layer
             }
         }
         return nil
@@ -110,10 +106,10 @@ class LayerHandler : UIView{
             print(WarningLayer[2])
             return
         }
-        for l in layers {
-            l.removeFromSuperview()
-            if l.label?.text == title {
-                layers.remove(at: l.tag)
+        for layer in layers {
+            layer.removeFromSuperview()
+            if layer.label?.text == title {
+                layers.remove(at: layer.tag)
             }
         }
         resetLayersTags()
@@ -135,16 +131,16 @@ class LayerHandler : UIView{
     
     fileprivate  func resetLayersTags(){
         tagForLayers = 0
-        for l in layers {
-            l.tag = tagForLayers
-            for sub in l.subviews {
+        for layer in layers {
+            layer.tag = tagForLayers
+            for sub in layer.subviews {
                 if let button : UIButton = sub as? UIButton {
-                    button.frame = CGRect(x: 0, y: 0, width: l.frame.width, height: l.frame.height)
+                    button.frame = CGRect(x: 0, y: 0, width: layer.frame.width, height: layer.frame.height)
                     button.tag = tagForLayers
                     tagForLayers += 1
                 }
             }
-            addSubview(l)
+            addSubview(layer)
         }
         resetLayersToOriginalPosition()
     }

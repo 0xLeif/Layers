@@ -9,9 +9,6 @@
 
 import UIKit
 
-
-
-
 class ViewController: UIViewController {
     var handler = LayerHandler()
     
@@ -28,14 +25,14 @@ class ViewController: UIViewController {
         }
     }
     
-    func add(){
+    func add() -> Layer?{
         func randomColor() -> UIColor{
             let red = arc4random_uniform(255)
             let blue = arc4random_uniform(255)
             let green = arc4random_uniform(255)
             return UIColor(red: CGFloat(red)/255, green: CGFloat(green)/255, blue: CGFloat(blue)/255, alpha: 1)
         }
-        handler.addLayer(randomColor(), title: "\(arc4random_uniform(100))")
+        return handler.addLayer(randomColor(), title: "\(arc4random_uniform(100))")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,8 +43,7 @@ class ViewController: UIViewController {
     func createLayers(){
         handler.addLayer(purple, title: "Title")
         handler.addLayer(blue, title: "Plan")
-        handler.addLayer(lightGreen, title: "Budget")
-        handler.layerWithTitle("Budget")?.addToInnerView({
+        handler.addLayer(lightGreen, title: "Budget")?.addToInnerView({
             let buttonSegue = UIButton(frame: CGRect(x: 30, y: 50, width: self.handler.layerWithTitle("Budget")!.frame.width-60, height: 50))
             buttonSegue.setTitle("Next", for: UIControlState())
             buttonSegue.addTarget(self, action: #selector(ViewController.segue(_:)), for: .touchUpInside)
